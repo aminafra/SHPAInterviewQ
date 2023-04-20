@@ -171,9 +171,7 @@ public class CheckInAndCheckOut : object
         {
             return "مرخصی ساعتی";
         }
-
         
-
         return "خطای محاسباتی";
     }
 }
