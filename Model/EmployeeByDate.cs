@@ -1,4 +1,4 @@
-﻿namespace InterViewQ;
+﻿namespace Model;
 
 public class EmployeeByDate
 {

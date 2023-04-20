@@ -1,9 +1,10 @@
 ﻿using System.Globalization;
 using System.Text;
+using InterviewQ.ExtensionMethods;
 
 namespace InterViewQ;
 
-public class EmployeeCheckinAndCheckout
+public class EmployeeAttendence
 {
 
 
@@ -12,7 +13,7 @@ public class EmployeeCheckinAndCheckout
 
 
     #region Cnstructor
-    public EmployeeCheckinAndCheckout(GetEmployeeWorkFile employeeDetails)
+    public EmployeeAttendence(GetEmployeeWorkFile employeeDetails)
     {
         EmployeeDetails = employeeDetails;
         GetInputs = new CheckInAndCheckOut(EmployeeDetails);

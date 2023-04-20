@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Text;
 
-namespace InterViewQ;
+namespace InterviewQ.ExtensionMethods;
 
 public static class ExtensionMethods
 {

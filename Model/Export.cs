@@ -1,6 +1,6 @@
-﻿namespace InterViewQ;
+﻿namespace Model;
 
-public class ExportEntity
+public class Export
 {
 
     public string? Date { get; set; }

@@ -1,6 +1,6 @@
-﻿namespace InterViewQ;
+﻿namespace Model;
 
-public class EmployeeEntity
+public class Employee
 {
     public int Id { get; set; }
     public string? Name { get; set; }

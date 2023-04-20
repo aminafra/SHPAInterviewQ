@@ -10,7 +10,7 @@ namespace InterViewQ
 
             var workFile = new GetEmployeeWorkFile(filePath);
 
-            var checkIn = new EmployeeCheckinAndCheckout(workFile);
+            var checkIn = new EmployeeAttendence(workFile);
 
             await checkIn.ExportFileAsync(fileTypes.csv);
         }

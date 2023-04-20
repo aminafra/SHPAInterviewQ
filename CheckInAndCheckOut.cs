@@ -1,26 +1,29 @@
-﻿namespace InterViewQ;
+﻿using InterviewQ.ExtensionMethods;
+using Model;
+
+namespace InterViewQ;
 
 public class CheckInAndCheckOut : object
 {
     private GetEmployeeWorkFile EmployeesWorks { get; }
-    private List<ExportEntity> ExportEntities { get; }
+    private List<Export> ExportEntities { get; }
 
 
     public CheckInAndCheckOut(GetEmployeeWorkFile employeesWorks) : base()
     {
         EmployeesWorks = employeesWorks;
-        ExportEntities = new List<ExportEntity>();
+        ExportEntities = new List<Export>();
     }
 
-    public List<ExportEntity> InputToExport()
+    public List<Export> InputToExport()
     {
         for (var i = 0; i < EmployeesWorks.EmployeeByDates.Count; i++)
         {
             var employee = EmployeesWorks.EmployeeByDates[i];
 
-            ExportEntities.Add(new ExportEntity
+            ExportEntities.Add(new Export
             {
-                Date = 
+                Date =
                     employee.Date.ToShamsi(),
                 DayOfWeek =
                     employee.Date.PersianDay(),
@@ -28,7 +31,7 @@ public class CheckInAndCheckOut : object
                     employee.Name,
                 DailyType =
                     DailyType(employee.Date, employee.Id),
-                HourlyWork = 
+                HourlyWork =
                     HourlyWork(employee.Date, employee.Id),
                 FirstCheckIn =
                     FirstCheckIn(employee.Date, employee.Id),
@@ -143,7 +146,7 @@ public class CheckInAndCheckOut : object
         TimeOnly defaultHourlyWork = TimeOnly.Parse("8:30:00");
 
         var records = Records(date, id);
-        
+
         if (records.Count == 0)
         {
             return "مرخصی روزانه";
@@ -157,9 +160,16 @@ public class CheckInAndCheckOut : object
         var endTime = LastCheckout(date, id);
         TimeOnly? hourlyWork = TimeOnly.Parse(HourlyWork(date, id)!);
 
-        if (startTime > defaultStart || endTime < defaultEnd)
+        if (hourlyWork < defaultHourlyWork)
         {
-            return "تاخیر";
+            if (records.Count > 2)
+            {
+                return "مرخصی ساعتی";
+            }
+            else if (startTime > defaultStart || endTime < defaultEnd)
+            {
+                return "تاخیر";
+            }
         }
 
         if (hourlyWork >= defaultHourlyWork)
@@ -167,11 +177,7 @@ public class CheckInAndCheckOut : object
             return "عادی";
         }
 
-        if (records.Count > 2 || hourlyWork < defaultHourlyWork)
-        {
-            return "مرخصی ساعتی";
-        }
-        
-        return "خطای محاسباتی";
+
+        return "عادی";
     }
 }
